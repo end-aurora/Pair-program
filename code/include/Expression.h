@@ -21,11 +21,7 @@ public:
     bool input(vector<char>& opArray, vector<Elem>& dArray);
 
     bool inputOp(vector<char>& opArray, int& i);
-
-
-protected:
-
-private:
+    
 };
 
 #endif // EXPRESSION_H
