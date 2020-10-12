@@ -11,38 +11,34 @@
 #include <string>
 #include <iostream>
 
-
-//Ö÷¼ÆËã
+//ä¸»è®¡ç®—
 bool mainCal(Expression& exp, Elem& res);
 
-//·ûºÅÔËËã
+//ç¬¦å·è¿ç®—
 const Elem opCal(const Elem& l, const Elem& r, char op);
 
-//ÔËËã·ûÓÅÏÈ¼¶
+//è¿ç®—ç¬¦ä¼˜å…ˆçº§
 bool opPriority(const char& op1, const char& op2);
 
-//Éú³Éº¯Êı
+//ç”Ÿæˆå‡½æ•°
 bool generateExp(const int& num, const int& range);
 
-//½«Ê½×ÓÆ´½Ó³É×Ö·û´®
+//å°†å¼å­æ‹¼æ¥æˆå­—ç¬¦ä¸²
 const string expToString(vector<char> opArray, vector<Elem> dArray);
 
-//½«Êı¾İ×ª»»×Ö·û´®
+//å°†æ•°æ®è½¬æ¢å­—ç¬¦ä¸²
 const string elemToString(Elem& dArray);
 
-//½«int×ª»¯Îªstring
+//å°†intè½¬åŒ–ä¸ºstring
 const string intToString(int x);
 
-//¼ì²éÕû¸öÎÄ¼şµÄ´ğ°¸
+//æ£€æŸ¥æ•´ä¸ªæ–‡ä»¶çš„ç­”æ¡ˆ
 void checkAnswer(const string& exercPath, const string& ansPath);
 
-//¼ì²é¸ÃÌâÊÇ·ñÕıÈ·
+//æ£€æŸ¥è¯¥é¢˜æ˜¯å¦æ­£ç¡®
 bool check(string& formula, string& answer);
 
-//×Ö·û´®×ª»»³ÉÊı¾İ
-const Elem stringToElem(const string& data);
-
-//½«±í´ïÊ½·Ö¸î
+//å°†è¡¨è¾¾å¼åˆ†å‰²
 vector<string> splitWithExp(string exp, const string tag);
 
 #endif // CALCULATOR_H
