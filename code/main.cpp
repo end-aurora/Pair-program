@@ -45,6 +45,8 @@ int main(int argc, char* argv[])
         else if (argv[1][1] == 'e' && argv[3][1] == 'a')
         {
             fstream exc, ans;
+			exc.open(argv[2]);
+			ans.open(argv[4]);
             if (!exc || !ans)
             {
                 cerr << "文件路径错误." << endl;
