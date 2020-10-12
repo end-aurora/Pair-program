@@ -5,14 +5,12 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-//    int argc = 5;
-//    char argv[5][20] = {"Myapp.exe", "-n", "8000", "-r", "500"};
     if (argc == 5)
     {
-        //Ëæ»úÉú³ÉÌâÄ¿
+        //éšæœºç”Ÿæˆé¢˜ç›®
         if (argv[1][1] == 'n' && argv[3][1] == 'r')
         {
-            //¼ì²én ºÍ range ²ÎÊı
+            //æ£€æŸ¥n å’Œ range å‚æ•°
             int i = 0;
             for (int k = 0; k < 2; k++)
             {
@@ -20,7 +18,7 @@ int main(int argc, char* argv[])
                 {
                     if (argv[2 + 2 * k][i] > '9' || argv[2 + 2 * k][i] < '0')
                     {
-                        cerr << "-n ºóµÄ²ÎÊıÓ¦¸ÃÊÇÕûÊı!" << endl;
+                        cerr << "-n åçš„å‚æ•°åº”è¯¥æ˜¯æ•´æ•°!" << endl;
                         return -1;
                     }
                     i++;
@@ -30,37 +28,37 @@ int main(int argc, char* argv[])
             int range = atoi(argv[4]);
             if (n <= 0 || n > 10000)
             {
-                cerr << "-n ºóµÄ²ÎÊıÓ¦¸ÃÔÚ 0 - 100000." << endl;
+                cerr << "-n åçš„å‚æ•°åº”è¯¥åœ¨ 0 - 100000." << endl;
             }
             if (range <= 0 || range > 1000)
             {
-                cerr << "-r ºóµÄ²ÎÊıÓ¦¸ÃÔÚ 0 - 10000." << endl;
+                cerr << "-r åçš„å‚æ•°åº”è¯¥åœ¨ 0 - 10000." << endl;
             }
             else
             {
                 generateExp(n, range);
-                cout << "Éú³ÉÌâÄ¿Óë´ğ°¸³É¹¦." << endl;
+                cout << "ç”Ÿæˆé¢˜ç›®ä¸ç­”æ¡ˆæˆåŠŸ." << endl;
             }
             return 0;
         }
-        //¼ì²éÎÄ¼ş´ğ°¸¶Ô´í
+        //æ£€æŸ¥æ–‡ä»¶ç­”æ¡ˆå¯¹é”™
         else if (argv[1][1] == 'e' && argv[3][1] == 'a')
         {
             fstream exc, ans;
             if (!exc || !ans)
             {
-                cerr << "ÎÄ¼şÂ·¾¶´íÎó." << endl;
+                cerr << "æ–‡ä»¶è·¯å¾„é”™è¯¯." << endl;
             }
             else
             {
                 checkAnswer(argv[2], argv[4]);
-                cout << "ÅĞ¶¨Íê±Ï, ½á¹ûÒÑÍ³¼Æµ½ÎÄ¼şGrade.txtÖĞ." << endl;
+                cout << "åˆ¤å®šå®Œæ¯•, ç»“æœå·²ç»Ÿè®¡åˆ°æ–‡ä»¶Grade.txtä¸­." << endl;
             }
             return 0;
         }
     }
-    cerr << "ÊäÈëµÄ²ÎÊıÓĞÎó!\n" << "ÕıÈ·µÄÊäÈë·½Ê½:\n"
-         << "1.Myapp.exe -n 10 -r 100 \n\t»ò \n"
+    cerr << "è¾“å…¥çš„å‚æ•°æœ‰è¯¯!\n" << "æ­£ç¡®çš„è¾“å…¥æ–¹å¼:\n"
+         << "1.Myapp.exe -n 10 -r 100 \n\tæˆ– \n"
          << "2.Myapp.exe -e <exercisefile>.txt -a <answerfile>.txt" << endl;
     return -1;
 }
