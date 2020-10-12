@@ -11,10 +11,10 @@ int main(int argc, char* argv[])
         if (argv[1][1] == 'n' && argv[3][1] == 'r')
         {
             //检查n 和 range 参数
-            int i = 0;
             for (int k = 0; k < 2; k++)
             {
-                while (argv[2 + 2 * k][i] != '\0')
+	    	int i = 0;
+                while (i < strlen(argv[2 + 2 * k]))
                 {
                     if (argv[2 + 2 * k][i] > '9' || argv[2 + 2 * k][i] < '0')
                     {
