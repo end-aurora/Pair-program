@@ -7,13 +7,13 @@ bool mainCal(Expression& exp, Elem& res)
     Elem ldata, rdata;
     while (!exp.opStack.empty())
     {
-        //È¡³ö×óÓÒÊı¾İ³öÕ»ºó, ÔÙ½«¼ÆËã½á¹ûÈëÕ»
+        //å–å‡ºå·¦å³æ•°æ®å‡ºæ ˆå, å†å°†è®¡ç®—ç»“æœå…¥æ ˆ
         rdata = exp.dStack.top();
         exp.dStack.pop();
         ldata = exp.dStack.top();
         exp.dStack.pop();
         Elem result(opCal(ldata, rdata, exp.opStack.top()));
-        //¼ÆËã¹ı³ÌÊÇ·ñ²úÉú¸ºÊı
+        //è®¡ç®—è¿‡ç¨‹æ˜¯å¦äº§ç”Ÿè´Ÿæ•°
         if (result.up < 0 || result.down < 0)
             return false;
         exp.dStack.push(result);
@@ -60,14 +60,14 @@ bool generateExp(const int& n, const int& range)
 
     for (int i = 0; i < n; i++)
     {
-        //Çå¿ÕÁ½¸öÈİÆ÷
+        //æ¸…ç©ºä¸¤ä¸ªå®¹å™¨
         dArray.clear();
         opArray.clear();
-        //¸ÃÌâµÄÔËËã·û¸öÊı
+        //è¯¥é¢˜çš„è¿ç®—ç¬¦ä¸ªæ•°
         opNum = rand() % 3 + 1;
         for (int j = 0; j < opNum; j++)
         {
-            //Éú³ÉopNum¸ö·ûºÅºÍÊı¾İ
+            //ç”ŸæˆopNumä¸ªç¬¦å·å’Œæ•°æ®
             opId = rand() % 4;
             opArray.push_back(oper[opId]);
             down = rand() % (range - 1) + 1;
@@ -78,7 +78,7 @@ bool generateExp(const int& n, const int& range)
         up = rand() % (down * range - 1) + 1;
         dArray.push_back(Elem (up, down));
 
-        //Éú³ÉÀ¨ºÅ
+        //ç”Ÿæˆæ‹¬å·
         if (opId < 2 && opNum > 1)
         {
             int pos = rand() % (opNum - 1);
@@ -87,9 +87,9 @@ bool generateExp(const int& n, const int& range)
         }
 
         Expression exp;
-        //¸Ã±í´ïÊ½²»ºÏ¸ñ
-        //1.ÖĞ¼ä¼ÆËã½á¹û³öÏÖ¸ºÊı
-        //2.ÔËËã½á¹ûÓëÆäËûÖØ¸´
+        //è¯¥è¡¨è¾¾å¼ä¸åˆæ ¼
+        //1.ä¸­é—´è®¡ç®—ç»“æœå‡ºç°è´Ÿæ•°
+        //2.è¿ç®—ç»“æœä¸å…¶ä»–é‡å¤
         if (!exp.input(opArray, dArray) || !mainCal(exp, res) ||
                 (find(resArray.begin(), resArray.end(), res) != resArray.end()))
         {
@@ -98,7 +98,7 @@ bool generateExp(const int& n, const int& range)
         }
         else
         {
-            //¼ÆËã½á¹ûĞ´ÈëÎÄ¼ş, ´ğ°¸´æÈëÈİÆ÷
+            //è®¡ç®—ç»“æœå†™å…¥æ–‡ä»¶, ç­”æ¡ˆå­˜å…¥å®¹å™¨
             exerc << i + 1 << ". " << expToString(opArray, dArray) << endl;
             resArray.push_back(res);
             ans << i + 1 << ". " << elemToString(res) << endl;
@@ -122,10 +122,10 @@ const string expToString(vector<char> opArray, vector<Elem> dArray)
     {
         if (j < dArray.size())
         {
-            //Æ´½ÓÊı¾İ
+            //æ‹¼æ¥æ•°æ®
             ret += elemToString(dArray[j++]);
         }
-        //Æ´½Ó×Ö·û´®
+        //æ‹¼æ¥ç¬¦å·
         if (i < opArray.size())
         {
             if (opArray[i] == ')')
@@ -134,7 +134,7 @@ const string expToString(vector<char> opArray, vector<Elem> dArray)
                 if (i < opArray.size())
                     ret = ret + " " + opArray[i++] + " ";
             }
-            else if (opArray[i + 1] == '(')
+            else if (i + 1 < opArray.size() && opArray[i + 1] == '(')
             {
                 ret = ret + " " + opArray[i++] + " ";
                 if (i < opArray.size())
@@ -154,14 +154,14 @@ const string expToString(vector<char> opArray, vector<Elem> dArray)
 const string elemToString(Elem& data)
 {
     string ret = "";
-    //1.¼Ù·ÖÊı×ª»¯Îª´ø·ÖÊı
+    //1.å‡åˆ†æ•°è½¬åŒ–ä¸ºå¸¦åˆ†æ•°
     if (data.up > data.down && data.up % data.down != 0)
     {
         ret = ret + intToString(data.up / data.down) + "'";
         data.up %= data.down;
         ret = ret + intToString(data.up) + "/" + intToString(data.down);
     }
-    //ÕûÊı
+    //æ•´æ•°
     else if (data.up % data.down == 0)
     {
         ret = ret + intToString(data.up / data.down);
@@ -188,18 +188,18 @@ const string intToString(int x)
 
 void checkAnswer(const string& exercPath, const string& ansPath)
 {
-    //Èı¸öÎÄ¼şÁ÷µÄ´ò¿ª
+    //ä¸‰ä¸ªæ–‡ä»¶æµçš„æ‰“å¼€
     ifstream exerc, ans;
     ofstream grade;
     exerc.open(exercPath);
     ans.open(ansPath);
     grade.open(".\\Grade.txt");
     string formula, answer;
-    //¼ÇÂ¼ÌâºÅ
+    //è®°å½•é¢˜å·
     int no = 1;
-    //±£´æÕıÈ·ºÍ´íÎóµÄÌâºÅ
+    //ä¿å­˜æ­£ç¡®å’Œé”™è¯¯çš„é¢˜å·
     vector<int> correct, wrong;
-    //ÅĞ¶Ï Ã¿µÀÌâµÄÕıÈ·Óë´íÎó
+    //åˆ¤æ–­ æ¯é“é¢˜çš„æ­£ç¡®ä¸é”™è¯¯
     while (getline(exerc, formula) && getline(ans, answer))
     {
         if (check(formula, answer))
@@ -211,7 +211,7 @@ void checkAnswer(const string& exercPath, const string& ansPath)
             wrong.push_back(no++);
         }
     }
-    //½«½á¹ûĞ´µ½ÎÄ¼şGrade.txtÖĞ
+    //å°†ç»“æœå†™åˆ°æ–‡ä»¶Grade.txtä¸­
     grade << "Correct: " << correct.size();
     if (correct.size() > 0)
     {
@@ -239,22 +239,22 @@ void checkAnswer(const string& exercPath, const string& ansPath)
 
 bool check(string& formula, string& answer)
 {
-    //É¾³ıÌâÄ¿±êºÅ
+    //åˆ é™¤é¢˜ç›®æ ‡å·
     int t = find(formula.begin(), formula.end(), '.') - formula.begin();
     formula.erase(0, t + 2);
     answer.erase(0, t + 2);
 
-    //½«ÌâÄ¿·Ö¸î²¢½øĞĞ¼ÆËã
+    //å°†é¢˜ç›®åˆ†å‰²å¹¶è¿›è¡Œè®¡ç®—
     vector<char> opArray;
     vector<Elem> dArray;
     vector<string> partVec = splitWithExp(formula, " ");
     int i = 0;
     while (i < partVec.size() - 1)
     {
-        //´¦ÀíÊı¾İ
+        //å¤„ç†æ•°æ®
         if (i % 2 == 0)
         {
-            //¿´ÊÇ·ñÓĞ×óÓÒÀ¨ºÅ
+            //çœ‹æ˜¯å¦æœ‰å·¦å³æ‹¬å·
             auto lPos = partVec[i].find("(");
             auto rPos = partVec[i].find(")");
             if (lPos != string::npos)
@@ -267,12 +267,12 @@ bool check(string& formula, string& answer)
                 opArray.push_back(')');
                 partVec[i].erase(partVec[i].begin() + rPos);
             }
-            //²éÕÒ´ø·ÖÊıµÄ·ûºÅÓë·ÖºÅ
+            //æŸ¥æ‰¾å¸¦åˆ†æ•°çš„ç¬¦å·ä¸åˆ†å·
             auto mixedPos = partVec[i].find("'");
             auto fracPos = partVec[i].find("/");
             auto dSize = partVec[i].size();
             int up, down;
-            //´ø·ÖÊı
+            //å¸¦åˆ†æ•°
             if (mixedPos != string::npos)
             {
 
@@ -281,13 +281,13 @@ bool check(string& formula, string& answer)
                 down = atoi(partVec[i].substr(fracPos + 1, dSize).c_str());
                 up = intNum * down + upNum;
             }
-            //Õæ·ÖÊı
+            //çœŸåˆ†æ•°
             else if (fracPos != string::npos)
             {
                 up = atoi(partVec[i].substr(0, fracPos).c_str());
                 down = atoi(partVec[i].substr(fracPos + 1, dSize).c_str());
             }
-            //ÕûÊı
+            //æ•´æ•°
             else
             {
                 up = atoi(partVec[i].c_str());
@@ -295,14 +295,14 @@ bool check(string& formula, string& answer)
             }
             dArray.push_back(Elem(up, down));
         }
-        //´¦Àí·ûºÅ
+        //å¤„ç†ç¬¦å·
         if (i % 2 == 1)
         {
             opArray.push_back(partVec[i][0]);
         }
         i++;
     }
-    //¼ÆËã´ğ°¸
+    //è®¡ç®—ç­”æ¡ˆ
     Expression exp;
     Elem res;
     exp.input(opArray, dArray);
